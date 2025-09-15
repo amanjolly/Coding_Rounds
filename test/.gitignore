@@ -12,6 +12,10 @@ target/
 *.iml
 *.ipr
 
+### File Extensions ###
+*.class
+*.log
+
 ### Eclipse ###
 .apt_generated
 .classpath
