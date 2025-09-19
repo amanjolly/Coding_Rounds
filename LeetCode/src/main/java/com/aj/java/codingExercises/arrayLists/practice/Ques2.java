@@ -9,6 +9,7 @@ public class Ques2 {
         ArrayList<Integer> integerArrayList = new ArrayList<>(Arrays.asList(4, 2, 9, 5, 12, 1));
         System.out.println(Arrays.toString(findMinMaxIndex(integerArrayList)));
         System.out.println(Arrays.toString(findMinMaxIndexUsingParallelStreams(integerArrayList)));
+        System.out.println(Arrays.toString(findMinMaxIndexUsingStreams(integerArrayList)));
 
     }
 
@@ -17,10 +18,8 @@ public class Ques2 {
         if (Objects.isNull(integerArrayList) || integerArrayList.isEmpty()) {
             return minMaxIndex;
         }
-        int maxInt = integerArrayList.get(0);
-        int minInt = integerArrayList.get(0);
-        int maxIndex = 0;
-        int minIndex = 0;
+        int maxInt = integerArrayList.getFirst();
+        int minInt = integerArrayList.getFirst();
 
         for (int currentInt : integerArrayList) { // We can also use simple for loop and start processing from 2nd index
             if (currentInt >= maxInt) {
@@ -49,6 +48,23 @@ public class Ques2 {
         Optional<Integer> maxIntegerIndex =
                 IntStream.range(0, integerList.size()).parallel().boxed().min(Comparator.comparingInt(integerList::get));
         maxIntegerIndex.ifPresent(integer -> minMaxIndex[1] = integer);
+        return minMaxIndex;
+    }
+
+
+    private static int[] findMinMaxIndexUsingStreams(List<Integer> integerList) {
+        int[] minMaxIndex = new int[]{-1, -1};
+        Optional<Integer> maxInteger = integerList.stream().max(Comparator.comparingInt(Integer::intValue));
+        int indexOfMaxInteger = integerList.indexOf(maxInteger.orElse(integerList.getFirst()));
+        minMaxIndex[0] = maxInteger.orElse(integerList.getFirst());
+        System.out.println("Max Integer is :" + minMaxIndex[0] +
+                " at position : " + indexOfMaxInteger);
+
+        Optional<Integer> minInteger = integerList.stream().min(Comparator.comparingInt(Integer::intValue));
+        int indexOfMinInteger = integerList.indexOf(minInteger.orElse(integerList.getFirst()));
+        minMaxIndex[1] = minInteger.orElse(integerList.getFirst());
+        System.out.println("Min Integer is :" + minMaxIndex[1] +
+                " at position : " + indexOfMinInteger);
         return minMaxIndex;
     }
 }
