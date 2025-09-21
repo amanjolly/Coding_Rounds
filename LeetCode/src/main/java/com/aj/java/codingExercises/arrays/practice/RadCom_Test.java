@@ -1,6 +1,5 @@
 package com.aj.java.codingExercises.arrays.practice;
 
-import java.lang.reflect.Array;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,6 +18,7 @@ public class RadCom_Test {
         // 2. Initialize left_pointer =0 => to mark the beginning of the current window.
         // 3. Create a HashMap (or dictionary) called integerFrequency to store the frequency of each
         // distinct integer within the current window.
+        // 4. Keep updating frequency of each distinct integer in the integerFrequency Map
 
         int[] integerArray= {1,2,1,2,3,5,5};
         Map<Integer,Integer> freqMap = new HashMap<>();
